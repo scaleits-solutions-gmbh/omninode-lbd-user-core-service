@@ -1,3 +1,3 @@
-// TODO: Export DTOs when implemented
-export * from './input';
-export * from './output'; 
+export * from './output/user-company.dto';
+export * from './input/create-user-company.dto';
+export * from './input/update-user-company.dto';

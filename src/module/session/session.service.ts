@@ -5,10 +5,15 @@ import { PaginatedData } from '@scaleits-solutions-gmbh/org-lib-global-common-ki
 export class SessionService {
   private readonly logger = new Logger(SessionService.name);
 
-  async getSessions(query: Record<string, string>): Promise<PaginatedData<any>> {
+  async getSessions(
+    query: Record<string, string>,
+  ): Promise<PaginatedData<any>> {
     this.logger.debug(`Getting sessions with query: ${JSON.stringify(query)}`);
     // TODO: Implement with SessionDao
-    return { data: [], pagination: { page: 1, limit: 10, total: 0, totalPages: 0 } };
+    return {
+      data: [],
+      pagination: { page: 1, limit: 10, total: 0, totalPages: 0 },
+    };
   }
 
   async getSession(sessionId: string): Promise<any> {
@@ -24,7 +29,9 @@ export class SessionService {
   }
 
   async updateSession(sessionId: string, updateSessionDto: any): Promise<any> {
-    this.logger.debug(`Updating session ${sessionId}: ${JSON.stringify(updateSessionDto)}`);
+    this.logger.debug(
+      `Updating session ${sessionId}: ${JSON.stringify(updateSessionDto)}`,
+    );
     // TODO: Implement with SessionDao
     return {};
   }
@@ -41,7 +48,10 @@ export class SessionService {
   ): Promise<PaginatedData<any>> {
     this.logger.debug(`Getting sessions for user ${userId}`);
     // TODO: Implement with SessionDao
-    return { data: [], pagination: { page: 1, limit: 10, total: 0, totalPages: 0 } };
+    return {
+      data: [],
+      pagination: { page: 1, limit: 10, total: 0, totalPages: 0 },
+    };
   }
 
   async createUserSession(userId: string, createSessionDto: any): Promise<any> {
@@ -55,4 +65,4 @@ export class SessionService {
     // TODO: Implement with SessionDao
     return {};
   }
-} 
+}

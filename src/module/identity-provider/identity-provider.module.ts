@@ -7,4 +7,4 @@ import { IdentityProviderService } from './identity-provider.service';
   providers: [IdentityProviderService],
   exports: [IdentityProviderService],
 })
-export class IdentityProviderModule {} 
+export class IdentityProviderModule {}

@@ -1,1 +1,1 @@
-// TODO: Export output DTOs when implemented 
+export * from './user-company.dto';

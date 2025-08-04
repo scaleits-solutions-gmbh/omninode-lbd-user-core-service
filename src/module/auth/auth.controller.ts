@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Body,
-} from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -50,4 +44,4 @@ export class UserAuthController {
   async enableUserAccount(@Param('userId') userId: string): Promise<any> {
     return this.authService.enableUserAccount(userId);
   }
-} 
+}

@@ -6,7 +6,9 @@ export class PasswordRecoveryService {
   private readonly logger = new Logger(PasswordRecoveryService.name);
 
   async requestPasswordRecovery(requestDto: any): Promise<any> {
-    this.logger.debug(`Requesting password recovery: ${JSON.stringify(requestDto)}`);
+    this.logger.debug(
+      `Requesting password recovery: ${JSON.stringify(requestDto)}`,
+    );
     // TODO: Implement with PasswordRecoveryTokenDao
     return {};
   }
@@ -29,7 +31,10 @@ export class PasswordRecoveryService {
   ): Promise<PaginatedData<any>> {
     this.logger.debug(`Getting recovery tokens for user ${userId}`);
     // TODO: Implement with PasswordRecoveryTokenDao
-    return { data: [], pagination: { page: 1, limit: 10, total: 0, totalPages: 0 } };
+    return {
+      data: [],
+      pagination: { page: 1, limit: 10, total: 0, totalPages: 0 },
+    };
   }
 
   async deleteRecoveryToken(userId: string, tokenId: string): Promise<any> {
@@ -37,4 +42,4 @@ export class PasswordRecoveryService {
     // TODO: Implement with PasswordRecoveryTokenDao
     return {};
   }
-} 
+}

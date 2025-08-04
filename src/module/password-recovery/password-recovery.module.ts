@@ -7,4 +7,4 @@ import { PasswordRecoveryService } from './password-recovery.service';
   providers: [PasswordRecoveryService],
   exports: [PasswordRecoveryService],
 })
-export class PasswordRecoveryModule {} 
+export class PasswordRecoveryModule {}

@@ -70,4 +70,4 @@ export class UserSessionController {
   async deleteUserSessions(@Param('userId') userId: string): Promise<any> {
     return this.sessionService.deleteUserSessions(userId);
   }
-} 
+}

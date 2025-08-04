@@ -7,4 +7,4 @@ import { UserCompanyService } from './user-company.service';
   providers: [UserCompanyService],
   exports: [UserCompanyService],
 })
-export class UserCompanyModule {} 
+export class UserCompanyModule {}

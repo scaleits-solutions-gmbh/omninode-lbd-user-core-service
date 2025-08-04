@@ -13,7 +13,9 @@ import { PaginatedData } from '@scaleits-solutions-gmbh/org-lib-global-common-ki
 
 @Controller('identity-providers')
 export class IdentityProviderController {
-  constructor(private readonly identityProviderService: IdentityProviderService) {}
+  constructor(
+    private readonly identityProviderService: IdentityProviderService,
+  ) {}
 
   @Get()
   async getIdentityProviders(
@@ -28,8 +30,12 @@ export class IdentityProviderController {
   }
 
   @Post()
-  async createIdentityProvider(@Body() createIdentityProviderDto: any): Promise<any> {
-    return this.identityProviderService.createIdentityProvider(createIdentityProviderDto);
+  async createIdentityProvider(
+    @Body() createIdentityProviderDto: any,
+  ): Promise<any> {
+    return this.identityProviderService.createIdentityProvider(
+      createIdentityProviderDto,
+    );
   }
 
   @Put('/:id')
@@ -37,7 +43,10 @@ export class IdentityProviderController {
     @Param('id') id: string,
     @Body() updateIdentityProviderDto: any,
   ): Promise<any> {
-    return this.identityProviderService.updateIdentityProvider(id, updateIdentityProviderDto);
+    return this.identityProviderService.updateIdentityProvider(
+      id,
+      updateIdentityProviderDto,
+    );
   }
 
   @Delete('/:id')
@@ -48,7 +57,9 @@ export class IdentityProviderController {
 
 @Controller('users/:userId/identity-providers')
 export class UserIdentityProviderController {
-  constructor(private readonly identityProviderService: IdentityProviderService) {}
+  constructor(
+    private readonly identityProviderService: IdentityProviderService,
+  ) {}
 
   @Get()
   async getUserIdentityProviders(
@@ -63,7 +74,10 @@ export class UserIdentityProviderController {
     @Param('userId') userId: string,
     @Body() linkUserDto: any,
   ): Promise<any> {
-    return this.identityProviderService.linkUserToIdentityProvider(userId, linkUserDto);
+    return this.identityProviderService.linkUserToIdentityProvider(
+      userId,
+      linkUserDto,
+    );
   }
 
   @Delete('/:providerId')
@@ -71,6 +85,9 @@ export class UserIdentityProviderController {
     @Param('userId') userId: string,
     @Param('providerId') providerId: string,
   ): Promise<any> {
-    return this.identityProviderService.unlinkUserFromIdentityProvider(userId, providerId);
+    return this.identityProviderService.unlinkUserFromIdentityProvider(
+      userId,
+      providerId,
+    );
   }
-} 
+}

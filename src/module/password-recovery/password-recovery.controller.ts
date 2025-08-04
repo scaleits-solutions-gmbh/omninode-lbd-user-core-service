@@ -12,7 +12,9 @@ import { PaginatedData } from '@scaleits-solutions-gmbh/org-lib-global-common-ki
 
 @Controller('password-recovery')
 export class PasswordRecoveryController {
-  constructor(private readonly passwordRecoveryService: PasswordRecoveryService) {}
+  constructor(
+    private readonly passwordRecoveryService: PasswordRecoveryService,
+  ) {}
 
   @Post('/request')
   async requestPasswordRecovery(@Body() requestDto: any): Promise<any> {
@@ -32,7 +34,9 @@ export class PasswordRecoveryController {
 
 @Controller('users/:userId/password-recovery')
 export class UserPasswordRecoveryController {
-  constructor(private readonly passwordRecoveryService: PasswordRecoveryService) {}
+  constructor(
+    private readonly passwordRecoveryService: PasswordRecoveryService,
+  ) {}
 
   @Get()
   async getUserRecoveryTokens(
@@ -49,4 +53,4 @@ export class UserPasswordRecoveryController {
   ): Promise<any> {
     return this.passwordRecoveryService.deleteRecoveryToken(userId, tokenId);
   }
-} 
+}
