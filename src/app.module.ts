@@ -3,7 +3,7 @@ import { UserModule } from './module';
 import { UserCompanyModule } from './module';
 import { SessionModule } from './module';
 import { IdentityProviderModule } from './module';
-import { PasswordRecoveryModule } from './module';
+import { PasswordRecoveryTokenModule } from './module';
 import { AuthModule } from './module';
 
 @Module({
@@ -12,7 +12,7 @@ import { AuthModule } from './module';
     UserCompanyModule,
     SessionModule,
     IdentityProviderModule,
-    PasswordRecoveryModule,
+    PasswordRecoveryTokenModule,
     AuthModule,
   ],
 })

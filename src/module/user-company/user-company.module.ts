@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UserCompanyController } from './user-company.controller';
-import { UserCompanyService } from './user-company.service';
+import { UserCompanyCrudsController } from './cruds/user-company.cruds.controller';
+import { UserCompanyCrudsService } from './cruds/user-company.cruds.service';
+import { UserCompanyOperationsController } from './operations/user-company.operations.controller';
+import { UserCompanyOperationsService } from './operations/user-company.operations.service';
 
 @Module({
-  controllers: [UserCompanyController],
-  providers: [UserCompanyService],
-  exports: [UserCompanyService],
+  controllers: [UserCompanyCrudsController, UserCompanyOperationsController],
+  providers: [UserCompanyCrudsService, UserCompanyOperationsService],
+  exports: [UserCompanyCrudsService, UserCompanyOperationsService],
 })
 export class UserCompanyModule {}
