@@ -9,8 +9,8 @@ This document explains how the **Omninode User Core Service** is configured for 
 ### **Service Type**
 - **Framework**: NestJS (Node.js)
 - **Deployment Target**: AWS Lambda
-- **Service Name**: `omninode-lbd-user-core-service`
-- **Package**: `@scaleits-solutions-gmbh/omninode-lbd-user`
+- **Service Name**: `omninode-serverless-user-domain`
+- **Package**: `@scaleits-solutions-gmbh/omninode-serverless-user-domain`
 
 ### **Current Architecture**
 ```
@@ -268,7 +268,7 @@ pnpm build
 ```json
 // package.json
 {
-  "name": "@scaleits-solutions-gmbh/omninode-lbd-user",
+  "name": "@scaleits-solutions-gmbh/omninode-serverless-user-domain",
   "version": "0.0.1",
   "description": "User Core Service",
   "scripts": {

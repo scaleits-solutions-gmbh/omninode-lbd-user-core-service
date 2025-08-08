@@ -3,7 +3,8 @@ import {
   UserCompanyDao,
   UserDao,
   CompanyDao,
-  GetUserCompaniesCollum,
+  GetUserCompaniesColumn,
+  UserCompany,
 } from '@scaleits-solutions-gmbh/omninode-lib-database-drizzle';
 import {
   CustomParams,
@@ -14,13 +15,7 @@ import {
   PaginatedData,
   paginateExternalData,
 } from '@scaleits-solutions-gmbh/org-lib-global-common-kit';
-import {
-  CreateUserCompanyDto,
-  UpdateUserCompanyDto,
-  UserCompanyDto,
-  UserCompanyDtoUtils,
-  ManagementConsoleAccess,
-} from './dto';
+import { CreateUserCompanyDto, UpdateUserCompanyDto } from './dto/input';
 
 /**
  * Service for managing basic user-company relationship CRUD operations.
@@ -34,7 +29,7 @@ export class UserCompanyCrudsService {
 
   async getUserCompanies(
     query: Record<string, string>,
-  ): Promise<PaginatedData<UserCompanyDto>> {
+  ): Promise<PaginatedData<UserCompany>> {
     const startTime = Date.now();
     this.logger.debug(
       `Fetching user-companies with query: ${JSON.stringify(query)}`,
@@ -60,7 +55,7 @@ export class UserCompanyCrudsService {
       }
 
       const customParams =
-        result.customParams as CustomParams<GetUserCompaniesCollum>;
+        result.customParams as CustomParams<GetUserCompaniesColumn>;
       this.logger.debug(`Built custom params: ${JSON.stringify(customParams)}`);
 
       const [userCompanies, total] = await Promise.all([
@@ -73,12 +68,8 @@ export class UserCompanyCrudsService {
         `Retrieved ${userCompanies.length} user-companies out of ${total} total in ${duration}ms`,
       );
 
-      const userCompaniesDto = UserCompanyDtoUtils.parseUserCompanyDtoList(
-        userCompanies as unknown as unknown[],
-      );
-
-      return paginateExternalData<UserCompanyDto>(
-        userCompaniesDto,
+      return paginateExternalData<UserCompany>(
+        userCompanies as unknown as UserCompany[],
         total,
         customParams.paginationOption?.page ??
           UserCompanyDao.cruds.getUserCompanies.defaultParams.paginationOption
@@ -124,7 +115,7 @@ export class UserCompanyCrudsService {
     }
   }
 
-  async getUserCompanyById(id: string): Promise<UserCompanyDto> {
+  async getUserCompanyById(id: string): Promise<UserCompany> {
     const startTime = Date.now();
     this.logger.debug(`Fetching user-company by ID: ${id}`);
 
@@ -149,7 +140,7 @@ export class UserCompanyCrudsService {
       this.logger.log(
         `Successfully retrieved user-company ${id} in ${duration}ms`,
       );
-      return UserCompanyDtoUtils.parseUserCompanyDto(userCompany);
+      return userCompany;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -165,7 +156,7 @@ export class UserCompanyCrudsService {
 
   async createUserCompany(
     createUserCompanyDto: CreateUserCompanyDto,
-  ): Promise<UserCompanyDto> {
+  ): Promise<UserCompany> {
     const startTime = Date.now();
     this.logger.debug(
       `Creating new user-company: ${JSON.stringify(createUserCompanyDto)}`,
@@ -209,9 +200,7 @@ export class UserCompanyCrudsService {
       const newUserCompany = {
         userId: createUserCompanyDto.userId,
         companyId: createUserCompanyDto.companyId,
-        managementConsoleAccess:
-          createUserCompanyDto.managementConsoleAccess ||
-          ManagementConsoleAccess.READ,
+        managementConsoleAccess: createUserCompanyDto.managementConsoleAccess,
       };
 
       const userCompany =
@@ -222,7 +211,7 @@ export class UserCompanyCrudsService {
         `Successfully created user-company with ID: ${userCompany.id} in ${duration}ms`,
       );
 
-      return UserCompanyDtoUtils.parseUserCompanyDto(userCompany);
+      return userCompany;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -239,7 +228,7 @@ export class UserCompanyCrudsService {
   async updateUserCompany(
     id: string,
     updateUserCompanyDto: UpdateUserCompanyDto,
-  ): Promise<UserCompanyDto> {
+  ): Promise<UserCompany> {
     const startTime = Date.now();
     this.logger.debug(
       `Updating user-company ${id}: ${JSON.stringify(updateUserCompanyDto)}`,
@@ -279,7 +268,7 @@ export class UserCompanyCrudsService {
       this.logger.log(
         `Successfully updated user-company ${id} in ${duration}ms`,
       );
-      return UserCompanyDtoUtils.parseUserCompanyDto(userCompany);
+      return userCompany;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -293,7 +282,7 @@ export class UserCompanyCrudsService {
     }
   }
 
-  async deleteUserCompany(id: string): Promise<UserCompanyDto> {
+  async deleteUserCompany(id: string): Promise<UserCompany> {
     const startTime = Date.now();
     this.logger.debug(`Deleting user-company: ${id}`);
 
@@ -320,7 +309,7 @@ export class UserCompanyCrudsService {
       this.logger.log(
         `Successfully deleted user-company ${id} in ${duration}ms`,
       );
-      return UserCompanyDtoUtils.parseUserCompanyDto(userCompany);
+      return userCompany;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =

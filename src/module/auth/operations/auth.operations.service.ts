@@ -24,7 +24,7 @@ import {
 export class AuthOperationsService {
   private readonly logger = new Logger(AuthOperationsService.name);
 
-  async login(loginDto: LoginDto): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{
+  async login(loginDto: LoginDto): Promise<{
     accessToken: string;
     refreshToken: string;
     user: any;
@@ -69,7 +69,7 @@ export class AuthOperationsService {
     }
   }
 
-  async logout(logoutDto: LogoutDto): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{ message: string }> { // eslint-disable-line @typescript-eslint/no-unused-vars
+  async logout(logoutDto: LogoutDto): Promise<{ message: string }> {
     const startTime = Date.now();
     this.logger.debug(`User logout`);
 
@@ -106,10 +106,10 @@ export class AuthOperationsService {
     }
   }
 
-  async refresh(refreshTokenDto: RefreshTokenDto): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{ // eslint-disable-line @typescript-eslint/no-unused-vars
-    accessToken: string; 
-    refreshToken: string; 
-    expiresIn: number; 
+  async refresh(refreshTokenDto: RefreshTokenDto): Promise<{
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: number;
   }> {
     const startTime = Date.now();
     this.logger.debug(`Token refresh`);
@@ -149,10 +149,10 @@ export class AuthOperationsService {
     }
   }
 
-  async verifyToken(verifyTokenDto: VerifyTokenDto): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{ // eslint-disable-line @typescript-eslint/no-unused-vars
-    valid: boolean; 
-    user?: any; 
-    expiresAt?: Date; 
+  async verifyToken(verifyTokenDto: VerifyTokenDto): Promise<{
+    valid: boolean;
+    user?: any;
+    expiresAt?: Date;
   }> {
     const startTime = Date.now();
     this.logger.debug(`Token verification`);
@@ -229,7 +229,7 @@ export class AuthOperationsService {
     }
   }
 
-  async getCurrentUser(): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{ user: any }> {
+  async getCurrentUser(): Promise<{ user: any }> {
     const startTime = Date.now();
     this.logger.debug('Getting current user');
 
@@ -345,7 +345,7 @@ export class AuthOperationsService {
     }
   }
 
-  async enableTwoFactor(enableTwoFactorDto: EnableTwoFactorDto): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{
+  async enableTwoFactor(enableTwoFactorDto: EnableTwoFactorDto): Promise<{
     qrCode: string;
     secret: string;
     backupCodes: string[];
@@ -464,7 +464,7 @@ export class AuthOperationsService {
     }
   }
 
-  async getUserAuthStatus(userId: string): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{
+  async getUserAuthStatus(userId: string): Promise<{
     userId: string;
     isActive: boolean;
     lastLogin?: Date;
@@ -507,7 +507,7 @@ export class AuthOperationsService {
     }
   }
 
-  async disableUserAccount(userId: string): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{ message: string }> {
+  async disableUserAccount(userId: string): Promise<{ message: string }> {
     const startTime = Date.now();
     this.logger.debug(`Disabling user account: ${userId}`);
 
@@ -545,7 +545,7 @@ export class AuthOperationsService {
     }
   }
 
-  async enableUserAccount(userId: string): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{ message: string }> {
+  async enableUserAccount(userId: string): Promise<{ message: string }> {
     const startTime = Date.now();
     this.logger.debug(`Enabling user account: ${userId}`);
 

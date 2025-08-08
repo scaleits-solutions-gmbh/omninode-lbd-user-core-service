@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import {
   PasswordRecoveryTokenDao,
-  GetPasswordRecoveryTokensCollum,
+  GetPasswordRecoveryTokensColumn,
+  PasswordRecoveryToken,
 } from '@scaleits-solutions-gmbh/omninode-lib-database-drizzle';
 import {
   CustomParams,
@@ -15,8 +16,6 @@ import {
 import {
   CreatePasswordRecoveryTokenDto,
   UpdatePasswordRecoveryTokenDto,
-  PasswordRecoveryTokenDto,
-  PasswordRecoveryTokenDtoUtils,
 } from './dto';
 
 /**
@@ -31,7 +30,7 @@ export class PasswordRecoveryTokenCrudsService {
 
   async getPasswordRecoveryTokens(
     query: Record<string, string>,
-  ): Promise<PaginatedData<PasswordRecoveryTokenDto>> {
+  ): Promise<PaginatedData<PasswordRecoveryToken>> {
     const startTime = Date.now();
     this.logger.debug(
       `Fetching password recovery tokens with query: ${JSON.stringify(query)}`,
@@ -59,7 +58,7 @@ export class PasswordRecoveryTokenCrudsService {
       }
 
       const customParams =
-        result.customParams as CustomParams<GetPasswordRecoveryTokensCollum>;
+        result.customParams as CustomParams<GetPasswordRecoveryTokensColumn>;
       this.logger.debug(`Built custom params: ${JSON.stringify(customParams)}`);
 
       const [tokens, total] = await Promise.all([
@@ -76,11 +75,8 @@ export class PasswordRecoveryTokenCrudsService {
         `Retrieved ${tokens.length} password recovery tokens out of ${total} total in ${duration}ms`,
       );
 
-      const tokensDto =
-        PasswordRecoveryTokenDtoUtils.parsePasswordRecoveryTokenDtoList(tokens);
-
-      return paginateExternalData<PasswordRecoveryTokenDto>(
-        tokensDto,
+      return paginateExternalData<PasswordRecoveryToken>(
+        tokens as unknown as PasswordRecoveryToken[],
         total,
         customParams.paginationOption?.page ??
           PasswordRecoveryTokenDao.cruds.getPasswordRecoveryTokens.defaultParams
@@ -129,7 +125,7 @@ export class PasswordRecoveryTokenCrudsService {
 
   async getPasswordRecoveryTokenById(
     tokenId: string,
-  ): Promise<PasswordRecoveryTokenDto> {
+  ): Promise<PasswordRecoveryToken> {
     const startTime = Date.now();
     this.logger.debug(`Fetching password recovery token by ID: ${tokenId}`);
 
@@ -158,7 +154,7 @@ export class PasswordRecoveryTokenCrudsService {
       this.logger.log(
         `Successfully retrieved password recovery token ${tokenId} in ${duration}ms`,
       );
-      return PasswordRecoveryTokenDtoUtils.parsePasswordRecoveryTokenDto(token);
+      return token;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -174,7 +170,7 @@ export class PasswordRecoveryTokenCrudsService {
 
   async createPasswordRecoveryToken(
     createPasswordRecoveryTokenDto: CreatePasswordRecoveryTokenDto,
-  ): Promise<PasswordRecoveryTokenDto> {
+  ): Promise<PasswordRecoveryToken> {
     const startTime = Date.now();
     this.logger.debug(
       `Creating new password recovery token: ${JSON.stringify(createPasswordRecoveryTokenDto)}`,
@@ -191,7 +187,7 @@ export class PasswordRecoveryTokenCrudsService {
         `Successfully created password recovery token with ID: ${token.id} in ${duration}ms`,
       );
 
-      return PasswordRecoveryTokenDtoUtils.parsePasswordRecoveryTokenDto(token);
+      return token;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -208,7 +204,7 @@ export class PasswordRecoveryTokenCrudsService {
   async updatePasswordRecoveryToken(
     tokenId: string,
     updatePasswordRecoveryTokenDto: UpdatePasswordRecoveryTokenDto,
-  ): Promise<PasswordRecoveryTokenDto> {
+  ): Promise<PasswordRecoveryToken> {
     const startTime = Date.now();
     this.logger.debug(
       `Updating password recovery token ${tokenId}: ${JSON.stringify(updatePasswordRecoveryTokenDto)}`,
@@ -240,7 +236,7 @@ export class PasswordRecoveryTokenCrudsService {
       this.logger.log(
         `Successfully updated password recovery token ${tokenId} in ${duration}ms`,
       );
-      return PasswordRecoveryTokenDtoUtils.parsePasswordRecoveryTokenDto(token);
+      return token;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -256,7 +252,7 @@ export class PasswordRecoveryTokenCrudsService {
 
   async deletePasswordRecoveryToken(
     tokenId: string,
-  ): Promise<PasswordRecoveryTokenDto> {
+  ): Promise<PasswordRecoveryToken> {
     const startTime = Date.now();
     this.logger.debug(`Deleting password recovery token: ${tokenId}`);
 
@@ -285,7 +281,7 @@ export class PasswordRecoveryTokenCrudsService {
       this.logger.log(
         `Successfully deleted password recovery token ${tokenId} in ${duration}ms`,
       );
-      return PasswordRecoveryTokenDtoUtils.parsePasswordRecoveryTokenDto(token);
+      return token;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =

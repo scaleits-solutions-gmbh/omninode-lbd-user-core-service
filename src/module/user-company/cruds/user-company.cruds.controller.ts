@@ -8,13 +8,13 @@ import {
   Body,
   Query,
 } from '@nestjs/common';
+import lambdaConfig from '../../../../lambda-config';
+import { Logger, Inject } from '@nestjs/common';
 import { UserCompanyCrudsService } from './user-company.cruds.service';
-import {
-  UserCompanyDto,
-  CreateUserCompanyDto,
-  UpdateUserCompanyDto,
-} from './dto';
+import { CreateUserCompanyDto, UpdateUserCompanyDto } from './dto';
 import { PaginatedData } from '@scaleits-solutions-gmbh/org-lib-global-common-kit';
+import { UserCompany } from '@scaleits-solutions-gmbh/omninode-lib-database-drizzle';
+import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 /**
  * Controller for handling basic user-company relationship CRUD operations.
@@ -27,41 +27,61 @@ import { PaginatedData } from '@scaleits-solutions-gmbh/org-lib-global-common-ki
  * - PUT /user-companies/cruds/:id - Update user-company relationship
  * - DELETE /user-companies/cruds/:id - Delete user-company relationship
  */
-@Controller('user-companies/cruds')
+@ApiTags('user-companies')
+@Controller(`${lambdaConfig.custom.cutomPath}/cruds/user-companies`)
 export class UserCompanyCrudsController {
+  private readonly logger = new Logger(UserCompanyCrudsController.name);
+
   constructor(
+    @Inject(UserCompanyCrudsService)
     private readonly userCompanyCrudsService: UserCompanyCrudsService,
-  ) {}
+  ) {
+    this.logger.debug('UserCompanyCrudsController: Constructor');
+  }
 
   @Get()
+  @ApiOperation({ summary: 'List user-company relationships' })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
+  @ApiResponse({ status: 200, description: 'Paginated user-company relationships' })
   async getUserCompanies(
     @Query() query: Record<string, string>,
-  ): Promise<PaginatedData<UserCompanyDto>> {
+  ): Promise<PaginatedData<UserCompany>> {
     return this.userCompanyCrudsService.getUserCompanies(query);
   }
 
   @Get('/count')
+  @ApiOperation({ summary: 'Get user-company relationships count' })
+  @ApiResponse({ status: 200, description: 'Count of relationships' })
   async getUserCompaniesCount(): Promise<{ count: number }> {
     return this.userCompanyCrudsService.getUserCompaniesCount();
   }
 
   @Get('/:id')
-  async getUserCompany(@Param('id') id: string): Promise<UserCompanyDto> {
+  @ApiOperation({ summary: 'Get user-company by id' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'User-company found' })
+  async getUserCompany(@Param('id') id: string): Promise<UserCompany> {
     return this.userCompanyCrudsService.getUserCompanyById(id);
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create user-company relationship' })
+  @ApiResponse({ status: 201, description: 'User-company created' })
   async createUserCompany(
     @Body() createUserCompanyDto: CreateUserCompanyDto,
-  ): Promise<UserCompanyDto> {
+  ): Promise<UserCompany> {
     return this.userCompanyCrudsService.createUserCompany(createUserCompanyDto);
   }
 
   @Put('/:id')
+  @ApiOperation({ summary: 'Update user-company relationship' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'User-company updated' })
   async updateUserCompany(
     @Param('id') id: string,
     @Body() updateUserCompanyDto: UpdateUserCompanyDto,
-  ): Promise<UserCompanyDto> {
+  ): Promise<UserCompany> {
     return this.userCompanyCrudsService.updateUserCompany(
       id,
       updateUserCompanyDto,
@@ -69,7 +89,10 @@ export class UserCompanyCrudsController {
   }
 
   @Delete('/:id')
-  async deleteUserCompany(@Param('id') id: string): Promise<UserCompanyDto> {
+  @ApiOperation({ summary: 'Delete user-company relationship' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'User-company deleted' })
+  async deleteUserCompany(@Param('id') id: string): Promise<UserCompany> {
     return this.userCompanyCrudsService.deleteUserCompany(id);
   }
 }

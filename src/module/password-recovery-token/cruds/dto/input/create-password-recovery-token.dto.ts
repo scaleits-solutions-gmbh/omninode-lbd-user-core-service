@@ -1,11 +1,4 @@
-import {
-  IsUUID,
-  IsString,
-  IsDateString,
-  IsBoolean,
-  IsOptional,
-  MaxLength,
-} from 'class-validator';
+import { IsUUID, IsString, MaxLength, IsDate } from 'class-validator';
 
 export class CreatePasswordRecoveryTokenDto {
   @IsUUID()
@@ -15,10 +8,6 @@ export class CreatePasswordRecoveryTokenDto {
   @MaxLength(255)
   token: string;
 
-  @IsDateString()
-  expiresAt: string;
-
-  @IsOptional()
-  @IsBoolean()
-  used?: boolean;
+  @IsDate()
+  expiresAt: Date;
 }

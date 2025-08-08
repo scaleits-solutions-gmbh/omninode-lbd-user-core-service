@@ -19,7 +19,7 @@ import {
 export class SessionOperationsService {
   private readonly logger = new Logger(SessionOperationsService.name);
 
-  async login(loginDto: LoginDto): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{
+  async login(loginDto: LoginDto): Promise<{
     message: string;
     sessionToken?: string;
     refreshToken?: string;
@@ -63,7 +63,7 @@ export class SessionOperationsService {
     }
   }
 
-  async logout(logoutDto: LogoutDto): Promise<// eslint-disable-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars{ message: string }> {
+  async logout(logoutDto: LogoutDto): Promise<{ message: string }> {
     const startTime = Date.now();
     this.logger.debug(
       `Processing logout for session: ${logoutDto.sessionToken}`,

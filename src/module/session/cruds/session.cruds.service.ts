@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import {
   SessionDao,
-  GetSessionsCollum,
+  GetSessionsColumn,
+  Session,
 } from '@scaleits-solutions-gmbh/omninode-lib-database-drizzle';
 import {
   CustomParams,
@@ -12,12 +13,7 @@ import {
   PaginatedData,
   paginateExternalData,
 } from '@scaleits-solutions-gmbh/org-lib-global-common-kit';
-import {
-  CreateSessionDto,
-  UpdateSessionDto,
-  SessionDto,
-  SessionDtoUtils,
-} from './dto';
+import { CreateSessionDto, UpdateSessionDto } from './dto/input';
 
 /**
  * Service for managing basic session CRUD operations.
@@ -31,7 +27,7 @@ export class SessionCrudsService {
 
   async getSessions(
     query: Record<string, string>,
-  ): Promise<PaginatedData<SessionDto>> {
+  ): Promise<PaginatedData<Session>> {
     const startTime = Date.now();
     this.logger.debug(`Fetching sessions with query: ${JSON.stringify(query)}`);
 
@@ -55,7 +51,7 @@ export class SessionCrudsService {
       }
 
       const customParams =
-        result.customParams as CustomParams<GetSessionsCollum>;
+        result.customParams as CustomParams<GetSessionsColumn>;
       this.logger.debug(`Built custom params: ${JSON.stringify(customParams)}`);
 
       const [sessions, total] = await Promise.all([
@@ -68,10 +64,8 @@ export class SessionCrudsService {
         `Retrieved ${sessions.length} sessions out of ${total} total in ${duration}ms`,
       );
 
-      const sessionsDto = SessionDtoUtils.parseSessionDtoList(sessions);
-
-      return paginateExternalData<SessionDto>(
-        sessionsDto,
+      return paginateExternalData<Session>(
+        sessions as unknown as Session[],
         total,
         customParams.paginationOption?.page ??
           SessionDao.cruds.getSessions.defaultParams.paginationOption.page,
@@ -113,7 +107,7 @@ export class SessionCrudsService {
     }
   }
 
-  async getSessionById(sessionId: string): Promise<SessionDto> {
+  async getSessionById(sessionId: string): Promise<Session> {
     const startTime = Date.now();
     this.logger.debug(`Fetching session by ID: ${sessionId}`);
 
@@ -134,7 +128,7 @@ export class SessionCrudsService {
       this.logger.log(
         `Successfully retrieved session ${sessionId} in ${duration}ms`,
       );
-      return SessionDtoUtils.parseSessionDto(session);
+      return session;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -148,7 +142,7 @@ export class SessionCrudsService {
     }
   }
 
-  async createSession(createSessionDto: CreateSessionDto): Promise<SessionDto> {
+  async createSession(createSessionDto: CreateSessionDto): Promise<Session> {
     const startTime = Date.now();
     this.logger.debug(
       `Creating new session: ${JSON.stringify(createSessionDto)}`,
@@ -163,7 +157,7 @@ export class SessionCrudsService {
         `Successfully created session with ID: ${session.id} in ${duration}ms`,
       );
 
-      return SessionDtoUtils.parseSessionDto(session);
+      return session;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -180,7 +174,7 @@ export class SessionCrudsService {
   async updateSession(
     sessionId: string,
     updateSessionDto: UpdateSessionDto,
-  ): Promise<SessionDto> {
+  ): Promise<Session> {
     const startTime = Date.now();
     this.logger.debug(
       `Updating session ${sessionId}: ${JSON.stringify(updateSessionDto)}`,
@@ -206,7 +200,7 @@ export class SessionCrudsService {
       this.logger.log(
         `Successfully updated session ${sessionId} in ${duration}ms`,
       );
-      return SessionDtoUtils.parseSessionDto(session);
+      return session;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -220,7 +214,7 @@ export class SessionCrudsService {
     }
   }
 
-  async deleteSession(sessionId: string): Promise<SessionDto> {
+  async deleteSession(sessionId: string): Promise<Session> {
     const startTime = Date.now();
     this.logger.debug(`Deleting session: ${sessionId}`);
 
@@ -243,7 +237,7 @@ export class SessionCrudsService {
       this.logger.log(
         `Successfully deleted session ${sessionId} in ${duration}ms`,
       );
-      return SessionDtoUtils.parseSessionDto(session);
+      return session;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =

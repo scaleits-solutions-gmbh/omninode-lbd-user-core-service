@@ -1,4 +1,5 @@
 import { Controller, Post, Param, Body } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserOperationsService } from './user.operations.service';
 import {
   UserRegistrationDto,
@@ -22,11 +23,14 @@ import {
  * - POST /users/operations/:id/deactivate - Deactivate user account
  * - POST /users/operations/:id/reactivate - Reactivate user account
  */
+@ApiTags('users-operations')
 @Controller('users/operations')
 export class UserOperationsController {
   constructor(private readonly userOperationsService: UserOperationsService) {}
 
   @Post('/register')
+  @ApiOperation({ summary: 'User registration' })
+  @ApiResponse({ status: 200, description: 'User registered' })
   async registerUser(
     @Body() userRegistrationDto: UserRegistrationDto,
   ): Promise<{ message: string; userId?: string }> {
@@ -34,6 +38,8 @@ export class UserOperationsController {
   }
 
   @Post('/verify-email')
+  @ApiOperation({ summary: 'Email verification' })
+  @ApiResponse({ status: 200, description: 'Email verified' })
   async verifyEmail(
     @Body() emailVerificationDto: EmailVerificationDto,
   ): Promise<{ message: string }> {
@@ -41,6 +47,8 @@ export class UserOperationsController {
   }
 
   @Post('/resend-verification')
+  @ApiOperation({ summary: 'Resend verification email' })
+  @ApiResponse({ status: 200, description: 'Verification email resent' })
   async resendVerification(
     @Body() resendVerificationDto: ResendVerificationDto,
   ): Promise<{ message: string }> {
@@ -48,6 +56,9 @@ export class UserOperationsController {
   }
 
   @Post('/:id/update-profile')
+  @ApiOperation({ summary: 'Update user profile' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'Profile updated' })
   async updateProfile(
     @Param('id') userId: string,
     @Body() updateProfileDto: UpdateProfileDto,
@@ -56,6 +67,9 @@ export class UserOperationsController {
   }
 
   @Post('/:id/change-password')
+  @ApiOperation({ summary: 'Change user password' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'Password changed' })
   async changePassword(
     @Param('id') userId: string,
     @Body() changePasswordDto: ChangePasswordDto,
@@ -64,6 +78,9 @@ export class UserOperationsController {
   }
 
   @Post('/:id/deactivate')
+  @ApiOperation({ summary: 'Deactivate user account' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'User deactivated' })
   async deactivateUser(
     @Param('id') userId: string,
     @Body() deactivateUserDto: DeactivateUserDto,
@@ -72,6 +89,9 @@ export class UserOperationsController {
   }
 
   @Post('/:id/reactivate')
+  @ApiOperation({ summary: 'Reactivate user account' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'User reactivated' })
   async reactivateUser(
     @Param('id') userId: string,
     @Body() reactivateUserDto: ReactivateUserDto,

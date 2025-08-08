@@ -9,7 +9,13 @@ import { PasswordRecoveryTokenOperationsService } from './operations/password-re
     PasswordRecoveryTokenCrudsController,
     PasswordRecoveryTokenOperationsController,
   ],
-  providers: [PasswordRecoveryTokenCrudsService, PasswordRecoveryTokenOperationsService],
-  exports: [PasswordRecoveryTokenCrudsService, PasswordRecoveryTokenOperationsService],
+  providers: [
+    PasswordRecoveryTokenCrudsService,
+    PasswordRecoveryTokenOperationsService,
+  ],
+  exports: [
+    PasswordRecoveryTokenCrudsService,
+    PasswordRecoveryTokenOperationsService,
+  ],
 })
 export class PasswordRecoveryTokenModule {}

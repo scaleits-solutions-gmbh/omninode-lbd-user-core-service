@@ -1,4 +1,6 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Logger, Inject } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import lambdaConfig from '../../../../lambda-config';
 import { PasswordRecoveryTokenOperationsService } from './password-recovery-token.operations.service';
 import {
   RequestPasswordRecoveryDto,
@@ -16,13 +18,23 @@ import {
  * - POST /password-recovery/operations/validate-token - Validate recovery token
  * - POST /password-recovery/operations/resend - Resend recovery email
  */
-@Controller('password-recovery/operations')
+@ApiTags('password-recovery-operations')
+@Controller(`${lambdaConfig.custom.cutomPath}/operations/password-recovery`)
 export class PasswordRecoveryTokenOperationsController {
+  private readonly logger = new Logger(
+    PasswordRecoveryTokenOperationsController.name,
+  );
+
   constructor(
+    @Inject(PasswordRecoveryTokenOperationsService)
     private readonly passwordRecoveryTokenOperationsService: PasswordRecoveryTokenOperationsService,
-  ) {}
+  ) {
+    this.logger.debug('PasswordRecoveryTokenOperationsController: Constructor');
+  }
 
   @Post('/request')
+  @ApiOperation({ summary: 'Request password recovery' })
+  @ApiResponse({ status: 200, description: 'Recovery requested' })
   async requestPasswordRecovery(
     @Body() requestPasswordRecoveryDto: RequestPasswordRecoveryDto,
   ): Promise<{ message: string; tokenId?: string }> {
@@ -32,6 +44,8 @@ export class PasswordRecoveryTokenOperationsController {
   }
 
   @Post('/reset')
+  @ApiOperation({ summary: 'Reset password using token' })
+  @ApiResponse({ status: 200, description: 'Password reset' })
   async resetPassword(
     @Body() resetPasswordDto: ResetPasswordDto,
   ): Promise<{ message: string }> {
@@ -41,6 +55,8 @@ export class PasswordRecoveryTokenOperationsController {
   }
 
   @Post('/validate-token')
+  @ApiOperation({ summary: 'Validate recovery token' })
+  @ApiResponse({ status: 200, description: 'Token validation result' })
   async validateToken(
     @Body() validateTokenDto: ValidateTokenDto,
   ): Promise<{ message: string; isValid: boolean; expiresAt?: Date }> {
@@ -50,10 +66,12 @@ export class PasswordRecoveryTokenOperationsController {
   }
 
   @Post('/resend')
+  @ApiOperation({ summary: 'Resend recovery email' })
+  @ApiResponse({ status: 200, description: 'Recovery email resent' })
   async resendRecoveryEmail(
     @Body() resendRecoveryEmailDto: ResendRecoveryEmailDto,
   ): Promise<{ message: string }> {
-    return this.passwordRecoveryOperationsService.resendRecoveryEmail(
+    return this.passwordRecoveryTokenOperationsService.resendRecoveryEmail(
       resendRecoveryEmailDto,
     );
   }

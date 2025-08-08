@@ -1,49 +1,32 @@
-import {
-  IsEmail,
-  IsString,
-  IsOptional,
-  MaxLength,
-  IsEnum,
-  IsDateString,
-} from 'class-validator';
+import { IsEmail, IsString, IsEnum } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Theme,
   Language,
 } from '@scaleits-solutions-gmbh/omninode-lib-global-common-kit';
 
 export class CreateUserDto {
-  @IsOptional()
-  @IsString()
-  imageUrl?: string;
-
+  @ApiProperty({ example: 'jane.doe@example.com' })
   @IsEmail()
-  @MaxLength(255)
   email: string;
 
+  @ApiProperty({ example: 'Jane' })
   @IsString()
-  @MaxLength(255)
   firstName: string;
 
-  @IsOptional()
+  @ApiProperty({ example: 'Doe' })
   @IsString()
-  @MaxLength(255)
-  middleNames?: string;
-
-  @IsString()
-  @MaxLength(255)
   lastName: string;
 
+  @ApiProperty({ example: 'Engineer' })
   @IsString()
-  @MaxLength(255)
   position: string;
 
+  @ApiProperty({ enum: Theme })
   @IsEnum(Theme)
-  theme: Theme;
+  theme: string;
 
+  @ApiProperty({ enum: Language })
   @IsEnum(Language)
-  language: Language;
-
-  @IsOptional()
-  @IsDateString()
-  lastSeenAt?: string;
+  language: string;
 }

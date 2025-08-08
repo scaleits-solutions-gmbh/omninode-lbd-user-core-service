@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import {
   UserDao,
-  GetUsersCollum,
+  GetUsersColumn,
+  User,
 } from '@scaleits-solutions-gmbh/omninode-lib-database-drizzle';
 import {
   CustomParams,
@@ -12,7 +13,7 @@ import {
   PaginatedData,
   paginateExternalData,
 } from '@scaleits-solutions-gmbh/org-lib-global-common-kit';
-import { CreateUserDto, UserDto, UserDtoUtils, UpdateUserDto } from './dto';
+import { CreateUserDto, UpdateUserDto } from './dto/input';
 
 /**
  * Service for managing basic user CRUD operations.
@@ -24,9 +25,7 @@ import { CreateUserDto, UserDto, UserDtoUtils, UpdateUserDto } from './dto';
 export class UserCrudsService {
   private readonly logger = new Logger(UserCrudsService.name);
 
-  async getUsers(
-    query: Record<string, string>,
-  ): Promise<PaginatedData<UserDto>> {
+  async getUsers(query: Record<string, string>): Promise<PaginatedData<User>> {
     const startTime = Date.now();
     this.logger.debug(`Fetching users with query: ${JSON.stringify(query)}`);
 
@@ -49,7 +48,7 @@ export class UserCrudsService {
         );
       }
 
-      const customParams = result.customParams as CustomParams<GetUsersCollum>;
+      const customParams = result.customParams as CustomParams<GetUsersColumn>;
       this.logger.debug(`Built custom params: ${JSON.stringify(customParams)}`);
 
       const [users, total] = await Promise.all([
@@ -62,10 +61,8 @@ export class UserCrudsService {
         `Retrieved ${users.length} users out of ${total} total in ${duration}ms`,
       );
 
-      const usersDto = UserDtoUtils.parseUserDtoList(users);
-
-      return paginateExternalData<UserDto>(
-        usersDto,
+      return paginateExternalData<User>(
+        users as unknown as User[],
         total,
         customParams.paginationOption?.page ??
           UserDao.cruds.getUsers.defaultParams.paginationOption.page,
@@ -107,7 +104,7 @@ export class UserCrudsService {
     }
   }
 
-  async getUserById(id: string): Promise<UserDto> {
+  async getUserById(id: string): Promise<User> {
     const startTime = Date.now();
     this.logger.debug(`Fetching user by ID: ${id}`);
 
@@ -126,7 +123,7 @@ export class UserCrudsService {
 
       const duration = Date.now() - startTime;
       this.logger.log(`Successfully retrieved user ${id} in ${duration}ms`);
-      return UserDtoUtils.parseUserDto(user);
+      return user;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -140,7 +137,7 @@ export class UserCrudsService {
     }
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<UserDto> {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
     const startTime = Date.now();
     this.logger.debug(`Creating new user: ${JSON.stringify(createUserDto)}`);
 
@@ -152,7 +149,7 @@ export class UserCrudsService {
         `Successfully created user with ID: ${user.id} in ${duration}ms`,
       );
 
-      return UserDtoUtils.parseUserDto(user);
+      return user;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -166,7 +163,7 @@ export class UserCrudsService {
     }
   }
 
-  async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<UserDto> {
+  async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const startTime = Date.now();
     this.logger.debug(`Updating user ${id}: ${JSON.stringify(updateUserDto)}`);
 
@@ -185,7 +182,7 @@ export class UserCrudsService {
 
       const duration = Date.now() - startTime;
       this.logger.log(`Successfully updated user ${id} in ${duration}ms`);
-      return UserDtoUtils.parseUserDto(user);
+      return user;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -199,7 +196,7 @@ export class UserCrudsService {
     }
   }
 
-  async deleteUser(id: string): Promise<UserDto> {
+  async deleteUser(id: string): Promise<User> {
     const startTime = Date.now();
     this.logger.debug(`Deleting user: ${id}`);
 
@@ -218,7 +215,7 @@ export class UserCrudsService {
 
       const duration = Date.now() - startTime;
       this.logger.log(`Successfully deleted user ${id} in ${duration}ms`);
-      return UserDtoUtils.parseUserDto(user);
+      return user;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =

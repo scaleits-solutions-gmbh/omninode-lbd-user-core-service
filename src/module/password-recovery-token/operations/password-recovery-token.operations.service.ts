@@ -16,7 +16,9 @@ import {
  */
 @Injectable()
 export class PasswordRecoveryTokenOperationsService {
-  private readonly logger = new Logger(PasswordRecoveryTokenOperationsService.name);
+  private readonly logger = new Logger(
+    PasswordRecoveryTokenOperationsService.name,
+  );
 
   async requestPasswordRecovery(
     requestPasswordRecoveryDto: RequestPasswordRecoveryDto,

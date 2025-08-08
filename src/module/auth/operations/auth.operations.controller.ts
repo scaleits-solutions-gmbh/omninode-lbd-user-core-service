@@ -1,4 +1,5 @@
 import { Controller, Post, Get, Param, Body } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthOperationsService } from './auth.operations.service';
 import {
   LoginDto,
@@ -12,6 +13,7 @@ import {
   DisableTwoFactorDto,
   VerifyTwoFactorDto,
 } from './dto';
+import lambdaConfig from 'lambda-config';
 
 /**
  * Controller for handling auth business logic operations.
@@ -29,11 +31,14 @@ import {
  * - POST /auth/operations/disable-2fa - Disable two-factor authentication
  * - POST /auth/operations/verify-2fa - Verify two-factor authentication
  */
-@Controller('auth/operations')
+@ApiTags('auth-operations')
+@Controller(`${lambdaConfig.custom.cutomPath}/operations/auth`)
 export class AuthOperationsController {
   constructor(private readonly authOperationsService: AuthOperationsService) {}
 
   @Post('/login')
+  @ApiOperation({ summary: 'User authentication' })
+  @ApiResponse({ status: 200, description: 'Login successful' })
   async login(@Body() loginDto: LoginDto): Promise<{
     accessToken: string;
     refreshToken: string;
@@ -44,11 +49,15 @@ export class AuthOperationsController {
   }
 
   @Post('/logout')
+  @ApiOperation({ summary: 'User logout' })
+  @ApiResponse({ status: 200, description: 'Logout successful' })
   async logout(@Body() logoutDto: LogoutDto): Promise<{ message: string }> {
     return this.authOperationsService.logout(logoutDto);
   }
 
   @Post('/refresh')
+  @ApiOperation({ summary: 'Token refresh' })
+  @ApiResponse({ status: 200, description: 'Token refreshed' })
   async refresh(@Body() refreshTokenDto: RefreshTokenDto): Promise<{
     accessToken: string;
     refreshToken: string;
@@ -58,6 +67,8 @@ export class AuthOperationsController {
   }
 
   @Post('/verify-token')
+  @ApiOperation({ summary: 'Token verification' })
+  @ApiResponse({ status: 200, description: 'Verification result' })
   async verifyToken(@Body() verifyTokenDto: VerifyTokenDto): Promise<{
     valid: boolean;
     user?: any;
@@ -67,6 +78,8 @@ export class AuthOperationsController {
   }
 
   @Post('/revoke-token')
+  @ApiOperation({ summary: 'Token revocation' })
+  @ApiResponse({ status: 200, description: 'Token revoked' })
   async revokeToken(
     @Body() revokeTokenDto: RevokeTokenDto,
   ): Promise<{ message: string }> {
@@ -74,11 +87,15 @@ export class AuthOperationsController {
   }
 
   @Get('/me')
+  @ApiOperation({ summary: 'Get current user info' })
+  @ApiResponse({ status: 200, description: 'Current user' })
   async getCurrentUser(): Promise<{ user: any }> {
     return this.authOperationsService.getCurrentUser();
   }
 
   @Post('/reset-password')
+  @ApiOperation({ summary: 'Password reset' })
+  @ApiResponse({ status: 200, description: 'Password reset' })
   async resetPassword(
     @Body() resetPasswordDto: ResetPasswordDto,
   ): Promise<{ message: string }> {
@@ -86,6 +103,8 @@ export class AuthOperationsController {
   }
 
   @Post('/change-password')
+  @ApiOperation({ summary: 'Password change' })
+  @ApiResponse({ status: 200, description: 'Password changed' })
   async changePassword(
     @Body() changePasswordDto: ChangePasswordDto,
   ): Promise<{ message: string }> {
@@ -93,6 +112,8 @@ export class AuthOperationsController {
   }
 
   @Post('/enable-2fa')
+  @ApiOperation({ summary: 'Enable two-factor authentication' })
+  @ApiResponse({ status: 200, description: '2FA enabled' })
   async enableTwoFactor(
     @Body() enableTwoFactorDto: EnableTwoFactorDto,
   ): Promise<{
@@ -104,6 +125,8 @@ export class AuthOperationsController {
   }
 
   @Post('/disable-2fa')
+  @ApiOperation({ summary: 'Disable two-factor authentication' })
+  @ApiResponse({ status: 200, description: '2FA disabled' })
   async disableTwoFactor(
     @Body() disableTwoFactorDto: DisableTwoFactorDto,
   ): Promise<{ message: string }> {
@@ -111,6 +134,8 @@ export class AuthOperationsController {
   }
 
   @Post('/verify-2fa')
+  @ApiOperation({ summary: 'Verify two-factor authentication' })
+  @ApiResponse({ status: 200, description: '2FA verification result' })
   async verifyTwoFactor(
     @Body() verifyTwoFactorDto: VerifyTwoFactorDto,
   ): Promise<{ valid: boolean }> {

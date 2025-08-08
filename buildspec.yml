@@ -1,0 +1,41 @@
+version: 0.2
+
+env:
+  secrets-manager:
+    NODE_AUTH_TOKEN: "OmniNode/Github:GITHUB_TOKEN"
+    SERVERLESS_ACCESS_KEY: "OmniNode/Serverless:SERVERLESS_ACCESS_KEY"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Configurando token do GitHub..."
+      - echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
+      - echo "@scaleits-solutions-gmbh:registry=https://npm.pkg.github.com" >> .npmrc
+      - echo "Instalando dependências somente para build..."
+      - npm install
+  pre_build:
+    commands:
+      - echo "Copiando serverless.ts do S3..."
+      - aws s3 cp s3://apiresources.omninode.one/serverless-files/serverless-drizzle.ts ./serverless.ts
+  build:
+    commands:
+      - echo "Compilando projeto NestJS..."
+      - npm run build
+      - echo "Deploy usando Serverless Framework (sem node_modules, usando Layer)..."
+      - npx serverless deploy --stage $stage
+
+artifacts:
+  files:
+    - dist/**/*
+    - serverless.ts
+    - package.json
+    - tsconfig.build.json
+    - .serverless/**/*
+  discard-paths: no
+
+cache:
+  paths:
+    - node_modules
+

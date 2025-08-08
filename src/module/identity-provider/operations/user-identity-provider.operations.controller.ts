@@ -1,12 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Delete,
-  Param,
-  Body,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, Body, Query } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IdentityProviderOperationsService } from './identity-provider.operations.service';
 import { LinkUserToProviderDto, UnlinkUserFromProviderDto } from './dto';
 import { PaginatedData } from '@scaleits-solutions-gmbh/org-lib-global-common-kit';
@@ -20,6 +13,7 @@ import { PaginatedData } from '@scaleits-solutions-gmbh/org-lib-global-common-ki
  * - DELETE /users/:userId/identity-providers/operations/:providerId/unlink - Unlink user from identity provider
  * - POST /users/:userId/identity-providers/operations/sync - Sync user from identity provider
  */
+@ApiTags('user-identity-provider-operations')
 @Controller('users/:userId/identity-providers/operations')
 export class UserIdentityProviderOperationsController {
   constructor(
@@ -27,6 +21,11 @@ export class UserIdentityProviderOperationsController {
   ) {}
 
   @Get()
+  @ApiOperation({ summary: "List a user's identity providers" })
+  @ApiParam({ name: 'userId', required: true })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
+  @ApiResponse({ status: 200, description: 'Paginated identity providers for user' })
   async getUserIdentityProviders(
     @Param('userId') userId: string,
     @Query() query: Record<string, string>,
@@ -38,6 +37,9 @@ export class UserIdentityProviderOperationsController {
   }
 
   @Post('/link')
+  @ApiOperation({ summary: 'Link user to identity provider' })
+  @ApiParam({ name: 'userId', required: true })
+  @ApiResponse({ status: 200, description: 'Link created' })
   async linkUserToIdentityProvider(
     @Param('userId') userId: string,
     @Body() linkUserToProviderDto: LinkUserToProviderDto,
@@ -49,6 +51,10 @@ export class UserIdentityProviderOperationsController {
   }
 
   @Delete('/:providerId/unlink')
+  @ApiOperation({ summary: 'Unlink user from identity provider' })
+  @ApiParam({ name: 'userId', required: true })
+  @ApiParam({ name: 'providerId', required: true })
+  @ApiResponse({ status: 200, description: 'Unlinked' })
   async unlinkUserFromIdentityProvider(
     @Param('userId') userId: string,
     @Param('providerId') providerId: string,
@@ -62,6 +68,9 @@ export class UserIdentityProviderOperationsController {
   }
 
   @Post('/sync')
+  @ApiOperation({ summary: 'Sync user from provider' })
+  @ApiParam({ name: 'userId', required: true })
+  @ApiResponse({ status: 200, description: 'Sync result' })
   async syncUserFromIdentityProvider(
     @Param('userId') userId: string,
   ): Promise<{ message: string; syncedData?: any }> {

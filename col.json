@@ -1,0 +1,1077 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-08-08T00:00:00.000Z",
+  "__export_source": "cursor-gpt-5",
+  "resources": [
+    {
+      "_id": "wrk_local",
+      "_type": "workspace",
+      "name": "Local",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_local_base",
+      "_type": "environment",
+      "parentId": "wrk_local",
+      "name": "Base Environment",
+      "data": {
+        "_local_base_url": "http://localhost:3000",
+        "company_domain_path": "company-domain",
+        "service_domain_path": "service-domain",
+        "weclapp_domain_path": "weclapp-domain",
+        "acmp_domain_path": "acmp-domain",
+        "user_domain_path": "user-domain",
+        "feedbacks_domain_path": "feedback-domain"
+      }
+    },
+    {
+      "_id": "fld_local",
+      "_type": "request_group",
+      "parentId": "wrk_local",
+      "name": "local"
+    },
+    {
+      "_id": "fld_company_domain",
+      "_type": "request_group",
+      "parentId": "fld_local",
+      "name": "company-domain"
+    },
+    {
+      "_id": "fld_company_companies",
+      "_type": "request_group",
+      "parentId": "fld_company_domain",
+      "name": "companies"
+    },
+    {
+      "_id": "fld_company_companies_cruds",
+      "_type": "request_group",
+      "parentId": "fld_company_companies",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_company_companies_ops",
+      "_type": "request_group",
+      "parentId": "fld_company_companies",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_company_relationships",
+      "_type": "request_group",
+      "parentId": "fld_company_domain",
+      "name": "company-relationships"
+    },
+    {
+      "_id": "fld_company_relationships_cruds",
+      "_type": "request_group",
+      "parentId": "fld_company_relationships",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_company_relationships_ops",
+      "_type": "request_group",
+      "parentId": "fld_company_relationships",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_company_user_invites",
+      "_type": "request_group",
+      "parentId": "fld_company_domain",
+      "name": "company-user-invites"
+    },
+    {
+      "_id": "fld_company_user_invites_cruds",
+      "_type": "request_group",
+      "parentId": "fld_company_user_invites",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_company_user_invites_ops",
+      "_type": "request_group",
+      "parentId": "fld_company_user_invites",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_service_domain",
+      "_type": "request_group",
+      "parentId": "fld_local",
+      "name": "service-domain"
+    },
+    {
+      "_id": "fld_service_instances",
+      "_type": "request_group",
+      "parentId": "fld_service_domain",
+      "name": "service-instances"
+    },
+    {
+      "_id": "fld_service_instances_cruds",
+      "_type": "request_group",
+      "parentId": "fld_service_instances",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_service_instances_ops",
+      "_type": "request_group",
+      "parentId": "fld_service_instances",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_service_instance_companies",
+      "_type": "request_group",
+      "parentId": "fld_service_domain",
+      "name": "service-instance-companies"
+    },
+    {
+      "_id": "fld_service_instance_companies_cruds",
+      "_type": "request_group",
+      "parentId": "fld_service_instance_companies",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_service_instance_companies_ops",
+      "_type": "request_group",
+      "parentId": "fld_service_instance_companies",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_service_instance_views",
+      "_type": "request_group",
+      "parentId": "fld_service_domain",
+      "name": "service-instance-views"
+    },
+    {
+      "_id": "fld_service_instance_views_cruds",
+      "_type": "request_group",
+      "parentId": "fld_service_instance_views",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_service_instance_views_ops",
+      "_type": "request_group",
+      "parentId": "fld_service_instance_views",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_weclapp_domain",
+      "_type": "request_group",
+      "parentId": "fld_local",
+      "name": "weclapp-domain"
+    },
+    {
+      "_id": "fld_weclapp_instances",
+      "_type": "request_group",
+      "parentId": "fld_weclapp_domain",
+      "name": "weclapp-service-instances"
+    },
+    {
+      "_id": "fld_weclapp_instances_cruds",
+      "_type": "request_group",
+      "parentId": "fld_weclapp_instances",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_weclapp_instances_ops",
+      "_type": "request_group",
+      "parentId": "fld_weclapp_instances",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_weclapp_instance_companies",
+      "_type": "request_group",
+      "parentId": "fld_weclapp_domain",
+      "name": "weclapp-service-instance-companies"
+    },
+    {
+      "_id": "fld_weclapp_instance_companies_cruds",
+      "_type": "request_group",
+      "parentId": "fld_weclapp_instance_companies",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_weclapp_instance_companies_ops",
+      "_type": "request_group",
+      "parentId": "fld_weclapp_instance_companies",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_acmp_domain",
+      "_type": "request_group",
+      "parentId": "fld_local",
+      "name": "acmp-domain"
+    },
+    {
+      "_id": "fld_acmp_instances",
+      "_type": "request_group",
+      "parentId": "fld_acmp_domain",
+      "name": "acmp-service-instances"
+    },
+    {
+      "_id": "fld_acmp_instances_cruds",
+      "_type": "request_group",
+      "parentId": "fld_acmp_instances",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_acmp_instances_ops",
+      "_type": "request_group",
+      "parentId": "fld_acmp_instances",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_feedbacks_core",
+      "_type": "request_group",
+      "parentId": "fld_local",
+      "name": "feedbacks-domain"
+    },
+    {
+      "_id": "fld_feedbacks_core_feedbacks",
+      "_type": "request_group",
+      "parentId": "fld_feedbacks_core",
+      "name": "feedbacks"
+    },
+    {
+      "_id": "fld_feedbacks_core_feedbacks_cruds",
+      "_type": "request_group",
+      "parentId": "fld_feedbacks_core_feedbacks",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_feedbacks_core_feedbacks_ops",
+      "_type": "request_group",
+      "parentId": "fld_feedbacks_core_feedbacks",
+      "name": "operations"
+    },
+    {
+      "_id": "req_companies_get_list",
+      "_type": "request",
+      "parentId": "fld_company_companies_cruds",
+      "name": "cruds/companies",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/companies"
+    },
+    {
+      "_id": "req_companies_get_count",
+      "_type": "request",
+      "parentId": "fld_company_companies_cruds",
+      "name": "cruds/companies/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/companies/count"
+    },
+    {
+      "_id": "req_companies_get_by_id",
+      "_type": "request",
+      "parentId": "fld_company_companies_cruds",
+      "name": "cruds/companies/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/companies/abc"
+    },
+    {
+      "_id": "req_companies_post",
+      "_type": "request",
+      "parentId": "fld_company_companies_cruds",
+      "name": "cruds/companies",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/companies"
+    },
+    {
+      "_id": "req_companies_put",
+      "_type": "request",
+      "parentId": "fld_company_companies_cruds",
+      "name": "cruds/companies/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/companies/abc"
+    },
+    {
+      "_id": "req_companies_delete",
+      "_type": "request",
+      "parentId": "fld_company_companies_cruds",
+      "name": "cruds/companies/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/companies/abc"
+    },
+    {
+      "_id": "req_comp_rel_get_list",
+      "_type": "request",
+      "parentId": "fld_company_relationships_cruds",
+      "name": "cruds/company-relationships",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-relationships"
+    },
+    {
+      "_id": "req_comp_rel_get_count",
+      "_type": "request",
+      "parentId": "fld_company_relationships_cruds",
+      "name": "cruds/company-relationships/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-relationships/count"
+    },
+    {
+      "_id": "req_comp_rel_get_by_id",
+      "_type": "request",
+      "parentId": "fld_company_relationships_cruds",
+      "name": "cruds/company-relationships/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-relationships/abc"
+    },
+    {
+      "_id": "req_comp_rel_post",
+      "_type": "request",
+      "parentId": "fld_company_relationships_cruds",
+      "name": "cruds/company-relationships",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-relationships"
+    },
+    {
+      "_id": "req_comp_rel_put",
+      "_type": "request",
+      "parentId": "fld_company_relationships_cruds",
+      "name": "cruds/company-relationships/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-relationships/abc"
+    },
+    {
+      "_id": "req_comp_rel_delete",
+      "_type": "request",
+      "parentId": "fld_company_relationships_cruds",
+      "name": "cruds/company-relationships/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-relationships/abc"
+    },
+    {
+      "_id": "req_comp_user_inv_get_list",
+      "_type": "request",
+      "parentId": "fld_company_user_invites_cruds",
+      "name": "cruds/company-user-invites",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-user-invites"
+    },
+    {
+      "_id": "req_comp_user_inv_get_count",
+      "_type": "request",
+      "parentId": "fld_company_user_invites_cruds",
+      "name": "cruds/company-user-invites/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-user-invites/count"
+    },
+    {
+      "_id": "req_comp_user_inv_get_by_id",
+      "_type": "request",
+      "parentId": "fld_company_user_invites_cruds",
+      "name": "cruds/company-user-invites/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-user-invites/abc"
+    },
+    {
+      "_id": "req_comp_user_inv_post",
+      "_type": "request",
+      "parentId": "fld_company_user_invites_cruds",
+      "name": "cruds/company-user-invites",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-user-invites"
+    },
+    {
+      "_id": "req_comp_user_inv_put",
+      "_type": "request",
+      "parentId": "fld_company_user_invites_cruds",
+      "name": "cruds/company-user-invites/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-user-invites/abc"
+    },
+    {
+      "_id": "req_comp_user_inv_delete",
+      "_type": "request",
+      "parentId": "fld_company_user_invites_cruds",
+      "name": "cruds/company-user-invites/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/cruds/company-user-invites/abc"
+    },
+    {
+      "_id": "req_serv_inst_get_list",
+      "_type": "request",
+      "parentId": "fld_service_instances_cruds",
+      "name": "cruds/service-instances",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instances"
+    },
+    {
+      "_id": "req_serv_inst_get_count",
+      "_type": "request",
+      "parentId": "fld_service_instances_cruds",
+      "name": "cruds/service-instances/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instances/count"
+    },
+    {
+      "_id": "req_serv_inst_get_by_id",
+      "_type": "request",
+      "parentId": "fld_service_instances_cruds",
+      "name": "cruds/service-instances/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instances/abc"
+    },
+    {
+      "_id": "req_serv_inst_post",
+      "_type": "request",
+      "parentId": "fld_service_instances_cruds",
+      "name": "cruds/service-instances",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instances"
+    },
+    {
+      "_id": "req_serv_inst_put",
+      "_type": "request",
+      "parentId": "fld_service_instances_cruds",
+      "name": "cruds/service-instances/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instances/abc"
+    },
+    {
+      "_id": "req_serv_inst_delete",
+      "_type": "request",
+      "parentId": "fld_service_instances_cruds",
+      "name": "cruds/service-instances/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instances/abc"
+    },
+    {
+      "_id": "req_serv_inst_comp_get_list",
+      "_type": "request",
+      "parentId": "fld_service_instance_companies_cruds",
+      "name": "cruds/service-instance-companies",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-companies"
+    },
+    {
+      "_id": "req_serv_inst_comp_get_count",
+      "_type": "request",
+      "parentId": "fld_service_instance_companies_cruds",
+      "name": "cruds/service-instance-companies/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-companies/count"
+    },
+    {
+      "_id": "req_serv_inst_comp_get_by_id",
+      "_type": "request",
+      "parentId": "fld_service_instance_companies_cruds",
+      "name": "cruds/service-instance-companies/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-companies/abc"
+    },
+    {
+      "_id": "req_serv_inst_comp_post",
+      "_type": "request",
+      "parentId": "fld_service_instance_companies_cruds",
+      "name": "cruds/service-instance-companies",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-companies"
+    },
+    {
+      "_id": "req_serv_inst_comp_put",
+      "_type": "request",
+      "parentId": "fld_service_instance_companies_cruds",
+      "name": "cruds/service-instance-companies/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-companies/abc"
+    },
+    {
+      "_id": "req_serv_inst_comp_delete",
+      "_type": "request",
+      "parentId": "fld_service_instance_companies_cruds",
+      "name": "cruds/service-instance-companies/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-companies/abc"
+    },
+    {
+      "_id": "req_serv_inst_views_get_list",
+      "_type": "request",
+      "parentId": "fld_service_instance_views_cruds",
+      "name": "cruds/service-instance-views",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-views"
+    },
+    {
+      "_id": "req_serv_inst_views_get_count",
+      "_type": "request",
+      "parentId": "fld_service_instance_views_cruds",
+      "name": "cruds/service-instance-views/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-views/count"
+    },
+    {
+      "_id": "req_serv_inst_views_get_by_id",
+      "_type": "request",
+      "parentId": "fld_service_instance_views_cruds",
+      "name": "cruds/service-instance-views/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/cruds/service-instance-views/abc"
+    },
+    {
+      "_id": "req_wec_inst_get_list",
+      "_type": "request",
+      "parentId": "fld_weclapp_instances_cruds",
+      "name": "cruds/weclapp-service-instances",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instances"
+    },
+    {
+      "_id": "req_wec_inst_get_count",
+      "_type": "request",
+      "parentId": "fld_weclapp_instances_cruds",
+      "name": "cruds/weclapp-service-instances/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instances/count"
+    },
+    {
+      "_id": "req_wec_inst_get_by_id",
+      "_type": "request",
+      "parentId": "fld_weclapp_instances_cruds",
+      "name": "cruds/weclapp-service-instances/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instances/abc"
+    },
+    {
+      "_id": "req_wec_inst_post",
+      "_type": "request",
+      "parentId": "fld_weclapp_instances_cruds",
+      "name": "cruds/weclapp-service-instances",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instances"
+    },
+    {
+      "_id": "req_wec_inst_put",
+      "_type": "request",
+      "parentId": "fld_weclapp_instances_cruds",
+      "name": "cruds/weclapp-service-instances/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instances/abc"
+    },
+    {
+      "_id": "req_wec_inst_delete",
+      "_type": "request",
+      "parentId": "fld_weclapp_instances_cruds",
+      "name": "cruds/weclapp-service-instances/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instances/abc"
+    },
+    {
+      "_id": "req_wec_inst_comp_get_list",
+      "_type": "request",
+      "parentId": "fld_weclapp_instance_companies_cruds",
+      "name": "cruds/weclapp-service-instance-companies",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instance-companies"
+    },
+    {
+      "_id": "req_wec_inst_comp_get_count",
+      "_type": "request",
+      "parentId": "fld_weclapp_instance_companies_cruds",
+      "name": "cruds/weclapp-service-instance-companies/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instance-companies/count"
+    },
+    {
+      "_id": "req_wec_inst_comp_get_by_id",
+      "_type": "request",
+      "parentId": "fld_weclapp_instance_companies_cruds",
+      "name": "cruds/weclapp-service-instance-companies/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instance-companies/abc"
+    },
+    {
+      "_id": "req_wec_inst_comp_post",
+      "_type": "request",
+      "parentId": "fld_weclapp_instance_companies_cruds",
+      "name": "cruds/weclapp-service-instance-companies",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instance-companies"
+    },
+    {
+      "_id": "req_wec_inst_comp_put",
+      "_type": "request",
+      "parentId": "fld_weclapp_instance_companies_cruds",
+      "name": "cruds/weclapp-service-instance-companies/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instance-companies/abc"
+    },
+    {
+      "_id": "req_wec_inst_comp_delete",
+      "_type": "request",
+      "parentId": "fld_weclapp_instance_companies_cruds",
+      "name": "cruds/weclapp-service-instance-companies/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/cruds/weclapp-service-instance-companies/abc"
+    },
+    {
+      "_id": "req_acmp_inst_get_list",
+      "_type": "request",
+      "parentId": "fld_acmp_instances_cruds",
+      "name": "cruds/acmp-service-instances",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.acmp_domain_path }}/v1/cruds/acmp-service-instances"
+    },
+    {
+      "_id": "req_acmp_inst_get_count",
+      "_type": "request",
+      "parentId": "fld_acmp_instances_cruds",
+      "name": "cruds/acmp-service-instances/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.acmp_domain_path }}/v1/cruds/acmp-service-instances/count"
+    },
+    {
+      "_id": "req_acmp_inst_get_by_id",
+      "_type": "request",
+      "parentId": "fld_acmp_instances_cruds",
+      "name": "cruds/acmp-service-instances/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.acmp_domain_path }}/v1/cruds/acmp-service-instances/abc"
+    },
+    {
+      "_id": "req_acmp_inst_post",
+      "_type": "request",
+      "parentId": "fld_acmp_instances_cruds",
+      "name": "cruds/acmp-service-instances",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.acmp_domain_path }}/v1/cruds/acmp-service-instances"
+    },
+    {
+      "_id": "req_acmp_inst_put",
+      "_type": "request",
+      "parentId": "fld_acmp_instances_cruds",
+      "name": "cruds/acmp-service-instances/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.acmp_domain_path }}/v1/cruds/acmp-service-instances/abc"
+    },
+    {
+      "_id": "req_acmp_inst_delete",
+      "_type": "request",
+      "parentId": "fld_acmp_instances_cruds",
+      "name": "cruds/acmp-service-instances/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.acmp_domain_path }}/v1/cruds/acmp-service-instances/abc"
+    },
+    {
+      "_id": "req_users_get_list",
+      "_type": "request",
+      "parentId": "fld_user_users_cruds",
+      "name": "cruds/users",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/users"
+    },
+    {
+      "_id": "req_users_get_count",
+      "_type": "request",
+      "parentId": "fld_user_users_cruds",
+      "name": "cruds/users/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/users/count"
+    },
+    {
+      "_id": "req_users_get_by_id",
+      "_type": "request",
+      "parentId": "fld_user_users_cruds",
+      "name": "cruds/users/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/users/abc"
+    },
+    {
+      "_id": "req_users_post",
+      "_type": "request",
+      "parentId": "fld_user_users_cruds",
+      "name": "cruds/users",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/users"
+    },
+    {
+      "_id": "req_users_put",
+      "_type": "request",
+      "parentId": "fld_user_users_cruds",
+      "name": "cruds/users/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/users/abc"
+    },
+    {
+      "_id": "req_users_delete",
+      "_type": "request",
+      "parentId": "fld_user_users_cruds",
+      "name": "cruds/users/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/users/abc"
+    },
+    {
+      "_id": "req_idp_get_list",
+      "_type": "request",
+      "parentId": "fld_user_identity_providers_cruds",
+      "name": "cruds/identity-providers",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/identity-providers"
+    },
+    {
+      "_id": "req_idp_get_count",
+      "_type": "request",
+      "parentId": "fld_user_identity_providers_cruds",
+      "name": "cruds/identity-providers/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/identity-providers/count"
+    },
+    {
+      "_id": "req_idp_get_by_id",
+      "_type": "request",
+      "parentId": "fld_user_identity_providers_cruds",
+      "name": "cruds/identity-providers/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/identity-providers/abc"
+    },
+    {
+      "_id": "req_idp_post",
+      "_type": "request",
+      "parentId": "fld_user_identity_providers_cruds",
+      "name": "cruds/identity-providers",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/identity-providers"
+    },
+    {
+      "_id": "req_idp_put",
+      "_type": "request",
+      "parentId": "fld_user_identity_providers_cruds",
+      "name": "cruds/identity-providers/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/identity-providers/abc"
+    },
+    {
+      "_id": "req_idp_delete",
+      "_type": "request",
+      "parentId": "fld_user_identity_providers_cruds",
+      "name": "cruds/identity-providers/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/identity-providers/abc"
+    },
+    {
+      "_id": "req_pwdrec_get_list",
+      "_type": "request",
+      "parentId": "fld_user_password_recovery_cruds",
+      "name": "cruds/password-recovery",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/password-recovery"
+    },
+    {
+      "_id": "req_pwdrec_get_count",
+      "_type": "request",
+      "parentId": "fld_user_password_recovery_cruds",
+      "name": "cruds/password-recovery/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/password-recovery/count"
+    },
+    {
+      "_id": "req_pwdrec_get_by_id",
+      "_type": "request",
+      "parentId": "fld_user_password_recovery_cruds",
+      "name": "cruds/password-recovery/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/password-recovery/abc"
+    },
+    {
+      "_id": "req_pwdrec_post",
+      "_type": "request",
+      "parentId": "fld_user_password_recovery_cruds",
+      "name": "cruds/password-recovery",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/password-recovery"
+    },
+    {
+      "_id": "req_pwdrec_put",
+      "_type": "request",
+      "parentId": "fld_user_password_recovery_cruds",
+      "name": "cruds/password-recovery/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/password-recovery/abc"
+    },
+    {
+      "_id": "req_pwdrec_delete",
+      "_type": "request",
+      "parentId": "fld_user_password_recovery_cruds",
+      "name": "cruds/password-recovery/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/password-recovery/abc"
+    },
+    {
+      "_id": "req_sessions_get_list",
+      "_type": "request",
+      "parentId": "fld_user_sessions_cruds",
+      "name": "cruds/sessions",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/sessions"
+    },
+    {
+      "_id": "req_sessions_get_count",
+      "_type": "request",
+      "parentId": "fld_user_sessions_cruds",
+      "name": "cruds/sessions/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/sessions/count"
+    },
+    {
+      "_id": "req_sessions_get_by_id",
+      "_type": "request",
+      "parentId": "fld_user_sessions_cruds",
+      "name": "cruds/sessions/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/sessions/abc"
+    },
+    {
+      "_id": "req_sessions_post",
+      "_type": "request",
+      "parentId": "fld_user_sessions_cruds",
+      "name": "cruds/sessions",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/sessions"
+    },
+    {
+      "_id": "req_sessions_put",
+      "_type": "request",
+      "parentId": "fld_user_sessions_cruds",
+      "name": "cruds/sessions/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/sessions/abc"
+    },
+    {
+      "_id": "req_sessions_delete",
+      "_type": "request",
+      "parentId": "fld_user_sessions_cruds",
+      "name": "cruds/sessions/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/sessions/abc"
+    },
+    {
+      "_id": "req_user_comp_get_list",
+      "_type": "request",
+      "parentId": "fld_user_user_companies_cruds",
+      "name": "cruds/user-companies",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/user-companies"
+    },
+    {
+      "_id": "req_user_comp_get_count",
+      "_type": "request",
+      "parentId": "fld_user_user_companies_cruds",
+      "name": "cruds/user-companies/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/user-companies/count"
+    },
+    {
+      "_id": "req_user_comp_get_by_id",
+      "_type": "request",
+      "parentId": "fld_user_user_companies_cruds",
+      "name": "cruds/user-companies/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/user-companies/abc"
+    },
+    {
+      "_id": "req_user_comp_post",
+      "_type": "request",
+      "parentId": "fld_user_user_companies_cruds",
+      "name": "cruds/user-companies",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/user-companies"
+    },
+    {
+      "_id": "req_user_comp_put",
+      "_type": "request",
+      "parentId": "fld_user_user_companies_cruds",
+      "name": "cruds/user-companies/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/user-companies/abc"
+    },
+    {
+      "_id": "req_user_comp_delete",
+      "_type": "request",
+      "parentId": "fld_user_user_companies_cruds",
+      "name": "cruds/user-companies/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.user_domain_path }}/v1/cruds/user-companies/abc"
+    },
+    {
+      "_id": "req_feedbacks_get_list",
+      "_type": "request",
+      "parentId": "fld_feedbacks_core_feedbacks_cruds",
+      "name": "cruds/feedbacks",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.feedbacks_domain_path }}/v1/cruds/feedbacks"
+    },
+    {
+      "_id": "req_feedbacks_get_count",
+      "_type": "request",
+      "parentId": "fld_feedbacks_core_feedbacks_cruds",
+      "name": "cruds/feedbacks/count",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.feedbacks_domain_path }}/v1/cruds/feedbacks/count"
+    },
+    {
+      "_id": "req_feedbacks_get_by_id",
+      "_type": "request",
+      "parentId": "fld_feedbacks_core_feedbacks_cruds",
+      "name": "cruds/feedbacks/id",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.feedbacks_domain_path }}/v1/cruds/feedbacks/abc"
+    },
+    {
+      "_id": "req_feedbacks_post",
+      "_type": "request",
+      "parentId": "fld_feedbacks_core_feedbacks_cruds",
+      "name": "cruds/feedbacks",
+      "method": "POST",
+      "url": "{{ _._local_base_url }}/{{ _.feedbacks_domain_path }}/v1/cruds/feedbacks"
+    },
+    {
+      "_id": "req_feedbacks_put",
+      "_type": "request",
+      "parentId": "fld_feedbacks_core_feedbacks_cruds",
+      "name": "cruds/feedbacks/id",
+      "method": "PUT",
+      "url": "{{ _._local_base_url }}/{{ _.feedbacks_domain_path }}/v1/cruds/feedbacks/abc"
+    },
+    {
+      "_id": "req_feedbacks_delete",
+      "_type": "request",
+      "parentId": "fld_feedbacks_core_feedbacks_cruds",
+      "name": "cruds/feedbacks/id",
+      "method": "DELETE",
+      "url": "{{ _._local_base_url }}/{{ _.feedbacks_domain_path }}/v1/cruds/feedbacks/abc"
+    },
+    {
+      "_id": "req_company_domain_docs_json",
+      "_type": "request",
+      "parentId": "fld_company_domain",
+      "name": "docs-json",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.company_domain_path }}/v1/docs-json"
+    },
+    {
+      "_id": "req_service_domain_docs_json",
+      "_type": "request",
+      "parentId": "fld_service_domain",
+      "name": "docs-json",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.service_domain_path }}/v1/docs-json"
+    },
+    {
+      "_id": "req_weclapp_domain_docs_json",
+      "_type": "request",
+      "parentId": "fld_weclapp_domain",
+      "name": "docs-json",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.weclapp_domain_path }}/v1/docs-json"
+    },
+    {
+      "_id": "req_acmp_domain_docs_json",
+      "_type": "request",
+      "parentId": "fld_acmp_domain",
+      "name": "docs-json",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.acmp_domain_path }}/v1/docs-json"
+    },
+    {
+      "_id": "req_feedbacks_core_docs_json",
+      "_type": "request",
+      "parentId": "fld_feedbacks_core",
+      "name": "docs-json",
+      "method": "GET",
+      "url": "{{ _._local_base_url }}/{{ _.feedbacks_domain_path }}/v1/docs-json"
+    },
+    {
+      "_id": "fld_user_domain",
+      "_type": "request_group",
+      "parentId": "fld_local",
+      "name": "user-domain"
+    },
+    {
+      "_id": "fld_user_users",
+      "_type": "request_group",
+      "parentId": "fld_user_domain",
+      "name": "users"
+    },
+    {
+      "_id": "fld_user_users_cruds",
+      "_type": "request_group",
+      "parentId": "fld_user_users",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_user_users_ops",
+      "_type": "request_group",
+      "parentId": "fld_user_users",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_user_identity_providers",
+      "_type": "request_group",
+      "parentId": "fld_user_domain",
+      "name": "identity-providers"
+    },
+    {
+      "_id": "fld_user_identity_providers_cruds",
+      "_type": "request_group",
+      "parentId": "fld_user_identity_providers",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_user_identity_providers_ops",
+      "_type": "request_group",
+      "parentId": "fld_user_identity_providers",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_user_password_recovery",
+      "_type": "request_group",
+      "parentId": "fld_user_domain",
+      "name": "password-recovery"
+    },
+    {
+      "_id": "fld_user_password_recovery_cruds",
+      "_type": "request_group",
+      "parentId": "fld_user_password_recovery",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_user_password_recovery_ops",
+      "_type": "request_group",
+      "parentId": "fld_user_password_recovery",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_user_sessions",
+      "_type": "request_group",
+      "parentId": "fld_user_domain",
+      "name": "sessions"
+    },
+    {
+      "_id": "fld_user_sessions_cruds",
+      "_type": "request_group",
+      "parentId": "fld_user_sessions",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_user_sessions_ops",
+      "_type": "request_group",
+      "parentId": "fld_user_sessions",
+      "name": "operations"
+    },
+    {
+      "_id": "fld_user_user_companies",
+      "_type": "request_group",
+      "parentId": "fld_user_domain",
+      "name": "user-companies"
+    },
+    {
+      "_id": "fld_user_user_companies_cruds",
+      "_type": "request_group",
+      "parentId": "fld_user_user_companies",
+      "name": "cruds"
+    },
+    {
+      "_id": "fld_user_user_companies_ops",
+      "_type": "request_group",
+      "parentId": "fld_user_user_companies",
+      "name": "operations"
+    }
+  ]
+}

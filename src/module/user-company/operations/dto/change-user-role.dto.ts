@@ -3,7 +3,7 @@ import { IsEnum, IsOptional, IsString } from 'class-validator';
 /**
  * Management console access levels
  */
-export enum ManagementConsoleAccess {
+export enum ChangeRoleManagementConsoleAccess {
   READ = 'READ',
   WRITE = 'WRITE',
   ADMIN = 'ADMIN',
@@ -13,8 +13,8 @@ export enum ManagementConsoleAccess {
  * DTO for changing user role in company operations
  */
 export class ChangeUserRoleDto {
-  @IsEnum(ManagementConsoleAccess)
-  newManagementConsoleAccess: ManagementConsoleAccess;
+  @IsEnum(ChangeRoleManagementConsoleAccess)
+  newManagementConsoleAccess: ChangeRoleManagementConsoleAccess;
 
   @IsOptional()
   @IsString()

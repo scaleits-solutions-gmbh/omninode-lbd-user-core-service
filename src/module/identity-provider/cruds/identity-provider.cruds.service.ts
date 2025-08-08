@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import {
   IdentityProviderDao,
-  GetIdentityProvidersCollum,
+  GetIdentityProvidersColumn,
+  IdentityProvider,
 } from '@scaleits-solutions-gmbh/omninode-lib-database-drizzle';
 import {
   CustomParams,
@@ -12,12 +13,7 @@ import {
   PaginatedData,
   paginateExternalData,
 } from '@scaleits-solutions-gmbh/org-lib-global-common-kit';
-import {
-  CreateIdentityProviderDto,
-  UpdateIdentityProviderDto,
-  IdentityProviderDto,
-  IdentityProviderDtoUtils,
-} from './dto';
+import { CreateIdentityProviderDto, UpdateIdentityProviderDto } from './dto';
 
 /**
  * Service for managing basic identity provider CRUD operations.
@@ -31,7 +27,7 @@ export class IdentityProviderCrudsService {
 
   async getIdentityProviders(
     query: Record<string, string>,
-  ): Promise<PaginatedData<IdentityProviderDto>> {
+  ): Promise<PaginatedData<IdentityProvider>> {
     const startTime = Date.now();
     this.logger.debug(
       `Fetching identity providers with query: ${JSON.stringify(query)}`,
@@ -57,7 +53,7 @@ export class IdentityProviderCrudsService {
       }
 
       const customParams =
-        result.customParams as CustomParams<GetIdentityProvidersCollum>;
+        result.customParams as CustomParams<GetIdentityProvidersColumn>;
       this.logger.debug(`Built custom params: ${JSON.stringify(customParams)}`);
 
       const [providers, total] = await Promise.all([
@@ -70,11 +66,8 @@ export class IdentityProviderCrudsService {
         `Retrieved ${providers.length} identity providers out of ${total} total in ${duration}ms`,
       );
 
-      const providersDto =
-        IdentityProviderDtoUtils.parseIdentityProviderDtoList(providers);
-
-      return paginateExternalData<IdentityProviderDto>(
-        providersDto,
+      return paginateExternalData<IdentityProvider>(
+        providers as unknown as IdentityProvider[],
         total,
         customParams.paginationOption?.page ??
           IdentityProviderDao.cruds.getIdentityProviders.defaultParams
@@ -121,7 +114,7 @@ export class IdentityProviderCrudsService {
     }
   }
 
-  async getIdentityProviderById(id: string): Promise<IdentityProviderDto> {
+  async getIdentityProviderById(id: string): Promise<IdentityProvider> {
     const startTime = Date.now();
     this.logger.debug(`Fetching identity provider by ID: ${id}`);
 
@@ -146,7 +139,7 @@ export class IdentityProviderCrudsService {
       this.logger.log(
         `Successfully retrieved identity provider ${id} in ${duration}ms`,
       );
-      return IdentityProviderDtoUtils.parseIdentityProviderDto(provider);
+      return provider;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -162,7 +155,7 @@ export class IdentityProviderCrudsService {
 
   async createIdentityProvider(
     createIdentityProviderDto: CreateIdentityProviderDto,
-  ): Promise<IdentityProviderDto> {
+  ): Promise<IdentityProvider> {
     const startTime = Date.now();
     this.logger.debug(
       `Creating new identity provider: ${JSON.stringify(createIdentityProviderDto)}`,
@@ -179,7 +172,7 @@ export class IdentityProviderCrudsService {
         `Successfully created identity provider with ID: ${provider.id} in ${duration}ms`,
       );
 
-      return IdentityProviderDtoUtils.parseIdentityProviderDto(provider);
+      return provider;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -196,7 +189,7 @@ export class IdentityProviderCrudsService {
   async updateIdentityProvider(
     id: string,
     updateIdentityProviderDto: UpdateIdentityProviderDto,
-  ): Promise<IdentityProviderDto> {
+  ): Promise<IdentityProvider> {
     const startTime = Date.now();
     this.logger.debug(
       `Updating identity provider ${id}: ${JSON.stringify(updateIdentityProviderDto)}`,
@@ -228,7 +221,7 @@ export class IdentityProviderCrudsService {
       this.logger.log(
         `Successfully updated identity provider ${id} in ${duration}ms`,
       );
-      return IdentityProviderDtoUtils.parseIdentityProviderDto(provider);
+      return provider;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =
@@ -242,7 +235,7 @@ export class IdentityProviderCrudsService {
     }
   }
 
-  async deleteIdentityProvider(id: string): Promise<IdentityProviderDto> {
+  async deleteIdentityProvider(id: string): Promise<IdentityProvider> {
     const startTime = Date.now();
     this.logger.debug(`Deleting identity provider: ${id}`);
 
@@ -269,7 +262,7 @@ export class IdentityProviderCrudsService {
       this.logger.log(
         `Successfully deleted identity provider ${id} in ${duration}ms`,
       );
-      return IdentityProviderDtoUtils.parseIdentityProviderDto(provider);
+      return provider;
     } catch (error) {
       const duration = Date.now() - startTime;
       const errorMessage =

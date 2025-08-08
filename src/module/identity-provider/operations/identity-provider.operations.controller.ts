@@ -1,4 +1,5 @@
 import { Controller, Post, Param, Body } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IdentityProviderOperationsService } from './identity-provider.operations.service';
 import {
   ConfigureIdentityProviderDto,
@@ -16,6 +17,7 @@ import {
  * - POST /identity-providers/operations/:id/sync-users - Sync users from provider
  * - POST /identity-providers/operations/:id/disable - Disable identity provider
  */
+@ApiTags('identity-provider-operations')
 @Controller('identity-providers/operations')
 export class IdentityProviderOperationsController {
   constructor(
@@ -23,6 +25,8 @@ export class IdentityProviderOperationsController {
   ) {}
 
   @Post('/configure')
+  @ApiOperation({ summary: 'Configure identity provider' })
+  @ApiResponse({ status: 200, description: 'Provider configured' })
   async configureIdentityProvider(
     @Body() configureIdentityProviderDto: ConfigureIdentityProviderDto,
   ): Promise<{ message: string; providerId?: string }> {
@@ -32,6 +36,9 @@ export class IdentityProviderOperationsController {
   }
 
   @Post('/:id/test-connection')
+  @ApiOperation({ summary: 'Test provider connection' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'Connection test result' })
   async testConnection(
     @Param('id') providerId: string,
     @Body() testConnectionDto: TestConnectionDto,
@@ -43,6 +50,9 @@ export class IdentityProviderOperationsController {
   }
 
   @Post('/:id/sync-users')
+  @ApiOperation({ summary: 'Sync users from provider' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'Sync result' })
   async syncUsers(
     @Param('id') providerId: string,
     @Body() syncUsersDto: SyncUsersDto,
@@ -54,6 +64,9 @@ export class IdentityProviderOperationsController {
   }
 
   @Post('/:id/disable')
+  @ApiOperation({ summary: 'Disable identity provider' })
+  @ApiParam({ name: 'id', required: true })
+  @ApiResponse({ status: 200, description: 'Provider disabled' })
   async disableIdentityProvider(
     @Param('id') providerId: string,
     @Body() disableIdentityProviderDto: DisableIdentityProviderDto,
